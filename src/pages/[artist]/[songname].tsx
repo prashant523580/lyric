@@ -8,7 +8,44 @@ import HTMLReactParser from "html-react-parser";
 import styles from "../../styles/Lyric.module.scss";
 import Link from "next/link";
 import Divider from "@/components/Divider";
+import Chord from '@tombatossals/react-chords/lib/Chord';
 
+
+import GuitarChord from 'react-guitar-chords';
+ 
+const MyChord = () => {
+  return (
+    <GuitarChord
+      chordName='C major'
+      frets={['x', 3, 2, 0, 1, 0]}
+    />
+  );
+}
+const GuitarChordComponent =() => {
+    const chord = {
+        frets: [1, 3, 3, 2, 1, 1],
+        fingers: [1, 3, 4, 2, 1, 1],
+        barres: [1],
+        capo: false,
+    }
+    const instrument = {
+        strings: 6,
+        fretsOnChord: 4,
+        name: 'Guitar',
+        keys: [],
+        tunings: {
+            standard: ['E', 'A', 'D', 'G', 'B', 'E']
+        }
+    }
+    const lite = false // defaults to false if omitted
+    return (
+        <Chord
+            chord={chord}
+            instrument={instrument}
+            lite={lite}
+        />
+    )
+}
 const GenerateChordLyric = ({ str }: any) => {
     let replaceStr;
     if (str) {
@@ -22,6 +59,7 @@ const GenerateChordLyric = ({ str }: any) => {
         </div>
     )
 }
+
 function Songs(props: any) {
     // const navigate = useNavigate();
     // const location = useLocation();
@@ -64,6 +102,7 @@ function Songs(props: any) {
                 </div>)
             })} */}
                 <h1>Artist : {currentArtistSong.artist}</h1>
+                {/* <GuitarChordComponent/> */}
                 <div className="flex justify-around">
                     <div className="w-1/2 px-4 max-md:px-1">
 

@@ -14,7 +14,7 @@ export default class Header extends React.Component{
         >
             <div className={styles.logo}>
                 {/* <img src="/logo.png" alt="logo" width={200} height={150} /> */}
-                <h1>CN</h1>
+                <h1>Lyric</h1>
             </div>
             <div className={styles.contact_container}>
                 <div className={styles.contact}>

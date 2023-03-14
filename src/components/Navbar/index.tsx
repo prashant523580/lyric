@@ -28,6 +28,10 @@ const navLink = [
     label: "Artists",
     path:"/artists"
     },
+    {
+    label: "Chords",
+    path:"/chords"
+    },
 ]
 export default class Navbar extends React.Component<{}, StateTypes>{
     private navRef: React.RefObject<HTMLDivElement>;
