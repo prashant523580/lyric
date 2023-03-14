@@ -31,11 +31,10 @@ function SongLists() {
     return (
     <MainLayout>
 
-    <div className="pt-10" >
-        <h1>artist song lists</h1>
+    <div className="px-4" >
         {artistSongList.map((item : any, ind :number) => {
             return (
-                <div key={ind} className="bg-gray-800 px-5 my-4" onClick={() => handleArtistSongLists(item)}>
+                <div key={ind} className="bg-gray-800 px-5 my-4 cursor-pointer" onClick={() => handleArtistSongLists(item)}>
                 <h1 className="text-green-400">{item.songname}</h1>
                 <p  className="text-white">{item.artist}</p>
                 </div>

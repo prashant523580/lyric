@@ -1,6 +1,7 @@
 import { getAllSongLists } from '@/redux/actions/songlist.action';
 import { RootState,AppDispatch } from '@/redux/store';
 // import { AppDispatch } from '@/redux/store';
+import styles from "../styles/Home.module.css"
 import React, { useEffect } from 'react'
 import {useDispatch} from "react-redux";
 export default function MainLayout(props: any) {
@@ -9,7 +10,7 @@ export default function MainLayout(props: any) {
         dispatch(getAllSongLists());
     },[dispatch])
   return (
-    <div>
+    <div className={styles.slide}>
         {props.children}
     </div>
   )

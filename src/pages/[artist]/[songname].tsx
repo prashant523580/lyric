@@ -6,6 +6,22 @@ import MainLayout from "@/components/Main";
 import { useAppSelector } from "@/redux/store";
 import HTMLReactParser from "html-react-parser";
 import styles from "../../styles/Lyric.module.scss";
+import Link from "next/link";
+import Divider from "@/components/Divider";
+
+const GenerateChordLyric = ({ str }: any) => {
+    let replaceStr;
+    if (str) {
+
+        replaceStr = str.replace(/\[(.*?)\]/g, "<span> $1</span>")
+        replaceStr = replaceStr.replace(/,/g, "<br/>")
+    }
+    return (
+        <div className={styles.lyricChord}>
+            {str && HTMLReactParser(replaceStr)}
+        </div>
+    )
+}
 function Songs(props: any) {
     // const navigate = useNavigate();
     // const location = useLocation();
@@ -13,50 +29,31 @@ function Songs(props: any) {
     const router = useRouter();
     const dispatch = useDispatch<any>();
     const [currentArtistSong, setCurrentArtistSong] = useState<any>({});
+    const [currentArtistAllSong, setCurrentArtistAllSong] = useState<any>([]);
 
     const songs = useAppSelector(state => state.songs.songLists);
     // const [artistSongs, setArtistSong] = useState(songs);
 
-
-  
     React.useEffect(() => {
         let { artist, songname } = router.query;
-            // console.log(router)
-            // console.log(artistSongs)
+        // console.log(router)
+        // console.log(artistSongs)
         if (songs.length > 0) {
-            
+            let artistSongs: any = [];
             songs.filter((item: any) => {
-                if(item.artist === artist && item.songname === songname)
-                setCurrentArtistSong(item)
+                if (item.artist === artist && item.songname === songname) {
+                    setCurrentArtistSong(item)
+                }
+                if (item.artist === artist) {
+                    artistSongs.push(item)
+                }
                 // console.log(item)
             })
+            setCurrentArtistAllSong(artistSongs)
         }
-        // dispatch(getSongByArtists({artist,song}))
-        // console.log(router)
-    }, [songs,router])
-    const handleLyricChord = (lyricChord: any) => {
-        // navigate("/lyrics", {
-        //     state: lyricChord
-        // })
-    }
+    }, [songs, router])
 
-    const GenerateChordLyric = ( {str} : any) => {
-        let  replaceStr;
-        React.useEffect(() => {
-            console.log(str)
-            
-        },[str])
-        if(str){
 
-            replaceStr = str.replace(/\[(.*?)\]/g, "<span> $1</span>")
-            replaceStr = replaceStr.replace(/,/g, "<br/>")
-        }
-        return (
-            <div className={styles.lyricChord}>
-                { str && HTMLReactParser(replaceStr)}
-            </div>
-        )
-    }
     return (
         <MainLayout>
 
@@ -67,7 +64,27 @@ function Songs(props: any) {
                 </div>)
             })} */}
                 <h1>Artist : {currentArtistSong.artist}</h1>
-                <GenerateChordLyric str={currentArtistSong.lyricChord}/>
+                <div className="flex justify-around">
+                    <div className="w-1/2 px-4 max-md:px-1">
+
+                    <GenerateChordLyric str={currentArtistSong.lyricChord} />
+                    </div>
+                    <div className="flex flex-col items-center w-1/2">
+                        <div className=" bg-gray-400 px-2 py-3">
+                            <div>
+                                <h1 className="text-2xl font-bold">Related Lyrics  </h1>
+                                <Divider />
+                            </div>
+                            <div className="px-2 flex flex-col">
+                                {currentArtistAllSong && currentArtistAllSong.map((item: any, ind: number) => {
+                                    return (
+                                        <Link className=" border-b my-1 border-blue-600" key={ind} href={`/${item.artist}/${item.songname}`}>{item.songname}</Link>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </MainLayout>
     )

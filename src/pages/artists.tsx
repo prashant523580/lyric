@@ -18,50 +18,58 @@ function Songs(props: any) {
     // const [artistSongs, setArtistSong] = useState(songs);
 
 
-  
+
     React.useEffect(() => {
         let { artist, songname } = router.query;
-            // console.log(router)
-            // console.log(artistSongs)
+        // console.log(router)
+        // console.log(artistSongs)
         if (songs.length > 0) {
-            
-            songs.filter((item: any) => {
-                if(item.artist === artist && item.songname === songname)
-                // setCurrentArtistSong(item)
-                console.log(item)
-            })
-            let artistObj : any ={};
-           let artistCategory =  songs.reduce((values : Array<string> ,item : any) => {
-                    if(!values.includes(item.artist)){
-                        values.push(item.artist)
-                    }
-                    return values
-            },[])
+            let artistCategory = songs.reduce((values: Array<string>, item: any) => {
+                if (!values.includes(item.artist)) {
+                    values.push(item.artist)
+                }
+                return values
+            }, [])
             // console.log(artistCategory)
             setArtistCategories(artistCategory)
         }
         // dispatch(getSongByArtists({artist,song}))
         // console.log(router)
     }, [songs])
-    const handleArtistSongList= (artist: any) => {
-            router.push(`/artist/${artist}`)
+
+    React.useEffect(() => {
+        let artistObj: any = {};
+        
+        
+        // console.log(artistObj, arry)
+    }, [artistCategories])
+    const getLength = (artist: any) => {
+        let arry : any= []
+        songs.filter((item: any) => {
+                if(item.artist === artist){
+                    arry.push(item)
+                }
+            })
+        return arry.length
+    }
+    const handleArtistSongList = (artist: any) => {
+        router.push(`/artist/${artist}`)
     }
 
     return (
         <MainLayout>
+            <div className={" px-4 py-4"} >
+                {artistCategories.map((item: any, ind: number) => {
+                    return (
+                        <div className={"bg-gray-700 my-2 px-2 py-2 text-white rounded-md cursor-pointer active:bg-gray-600"}
+                            key={ind}
+                            onClick={() => handleArtistSongList(item)}
+                        >
+                            <h4 className="text-green-400">{item}</h4>
+                            <p>songs: {getLength(item)}</p>
+                        </div>)
+                })}
 
-                <h1>Artist : </h1>
-            <div className={"bg-gray-800 px-4 py-4"} >
-                {artistCategories.map((item :any, ind :number) => {
-            return (
-            <div className={"bg-gray-700 my-2 px-2 py-2 text-white rounded-md cursor-pointer active:bg-gray-600"} 
-                key={ind}
-                onClick={() => handleArtistSongList(item)}
-                >
-                    <h4>{item}</h4>
-                </div>)
-            })}
-                
             </div>
         </MainLayout>
     )
