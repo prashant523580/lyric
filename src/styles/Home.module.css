@@ -284,11 +284,11 @@
 
 @keyframes slide {
   from {
-    transform: translateX(1000px);
+    /* transform: translateX(1000px); */
     opacity: 0;
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    /* transform: translateX(0); */
   }
 }
