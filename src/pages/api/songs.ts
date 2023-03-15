@@ -103,7 +103,8 @@ const lyricChords = [
                 ]
             }
         ]
-    }, {
+    }, 
+    {
 
         "artist": "Astha",
         "img": "/images/1974ad-Logo.jpg",
@@ -151,7 +152,8 @@ export default function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
-    if(req.method === "GET"){
+    console.log(req.method)
+    if(req.method == "GET"){
 
         res.status(200).json({ songLists })
     }

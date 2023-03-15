@@ -100,7 +100,7 @@ function HomePage() {
          router.push(`/${artist.artist}/${artist.songname}`)
     }
     return (
-    <MainLayout>
+    <>
 
     <div className="pt-10 px-5" >
         {lyricChords.map((item : any, ind :number) => {
@@ -112,7 +112,7 @@ function HomePage() {
                 )
             })}
     </div>
-            </MainLayout>
+            </>
     )
 }
 

@@ -7,6 +7,7 @@ import { Button } from "@mui/material";
 // import YoutubeComponent from "../youtube-component/Youtube";
 // import { YouTube } from "@mui/icons-material";
 import Header from "./Header";
+import { useRouter } from "next/router";
 interface StateTypes {
     isShow: boolean,
     scroll: number,
@@ -33,6 +34,25 @@ const navLink = [
     path:"/chords"
     },
 ]
+
+function ActiveLink({ children, href } : any) {
+    const router = useRouter();
+    const style = {
+      marginRight: 10,
+      color: router.asPath === href ? 'green' : 'black',
+    }
+  
+    const handleClick = (e : any) => {
+      e.preventDefault()
+      router.push(href)
+    }
+  
+    return (
+      <a href={href} onClick={handleClick} style={style}>
+        {children}
+      </a>
+    )
+  }
 export default class Navbar extends React.Component<{}, StateTypes>{
     private navRef: React.RefObject<HTMLDivElement>;
     // private youtubeRef: React.RefObject<HTMLDivElement> | undefined;
@@ -130,9 +150,10 @@ export default class Navbar extends React.Component<{}, StateTypes>{
                             {
                                 navLink.map((link: any, ind: number) => {
                                     return (
-                                        <Link
-                                        onClick={() => this.setState({ isShow: false })}
-                                        href={`${link.path}`} key={ind}>{link.label}</Link>
+                                        <ActiveLink href={link.path}> {link.label} </ActiveLink>
+                                        // <Link
+                                        // onClick={() => this.setState({ isShow: false })}
+                                        // href={`${link.path}`} key={ind}>{link.label}</Link>
                                     )
                                 })
                             }

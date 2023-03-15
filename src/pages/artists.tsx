@@ -57,7 +57,7 @@ function Songs(props: any) {
     }
 
     return (
-        <MainLayout>
+        <>
             <div className={" px-4 py-4"} >
                 {artistCategories.map((item: any, ind: number) => {
                     return (
@@ -71,7 +71,7 @@ function Songs(props: any) {
                 })}
 
             </div>
-        </MainLayout>
+        </>
     )
 }
 

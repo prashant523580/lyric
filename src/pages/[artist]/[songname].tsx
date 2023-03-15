@@ -93,7 +93,7 @@ function Songs(props: any) {
 
 
     return (
-        <MainLayout>
+        <>
 
             <div className={"items"} style={{ paddingTop: "55px" }}>
                 {/* {artistSongs.map((item :any, ind :number) => {
@@ -109,12 +109,12 @@ function Songs(props: any) {
                     <GenerateChordLyric str={currentArtistSong.lyricChord} />
                     </div>
                     <div className="flex flex-col items-center w-1/2">
-                        <div className=" bg-gray-400 px-2 py-3">
-                            <div>
-                                <h1 className="text-2xl font-bold">Related Lyrics  </h1>
+                        <div className=" px-2 py-3">
+                            <div className=" flex flex-col items-center my-2">
+                                <h1 className="text-xl font-bold">Related Lyric and Chordss  </h1>
                                 <Divider />
                             </div>
-                            <div className="px-2 flex flex-col">
+                            <div className="px-2 flex flex-col bg-gray-400 ">
                                 {currentArtistAllSong && currentArtistAllSong.map((item: any, ind: number) => {
                                     return (
                                         <Link className=" border-b my-1 border-blue-600" key={ind} href={`/${item.artist}/${item.songname}`}>{item.songname}</Link>
@@ -125,7 +125,7 @@ function Songs(props: any) {
                     </div>
                 </div>
             </div>
-        </MainLayout>
+        </>
     )
 }
 

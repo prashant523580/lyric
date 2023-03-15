@@ -29,7 +29,7 @@ function SongLists() {
          router.push(`/${item.artist}/${item.songname}`)
     }
     return (
-    <MainLayout>
+    <>
 
     <div className="px-4" >
         {artistSongList.map((item : any, ind :number) => {
@@ -41,7 +41,7 @@ function SongLists() {
                 )
             })}
     </div>
-            </MainLayout>
+            </>
     )
 }
 
