@@ -150,7 +150,7 @@ export default class Navbar extends React.Component<{}, StateTypes>{
                             {
                                 navLink.map((link: any, ind: number) => {
                                     return (
-                                        <ActiveLink href={link.path}> {link.label} </ActiveLink>
+                                        <ActiveLink key={ind} href={link.path}> {link.label} </ActiveLink>
                                         // <Link
                                         // onClick={() => this.setState({ isShow: false })}
                                         // href={`${link.path}`} key={ind}>{link.label}</Link>

@@ -37,12 +37,7 @@ function Songs(props: any) {
         // console.log(router)
     }, [songs])
 
-    React.useEffect(() => {
-        let artistObj: any = {};
-        
-        
-        // console.log(artistObj, arry)
-    }, [artistCategories])
+  
     const getLength = (artist: any) => {
         let arry : any= []
         songs.filter((item: any) => {
