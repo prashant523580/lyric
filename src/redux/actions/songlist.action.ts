@@ -5,8 +5,14 @@ export const getAllSongLists = () => {
 
     return async (dispatch : any) =>{
  
-        let res = await axiosInstance.get(`/api/songs`);
-        let {songLists} = await res.data;
+        // let res = await axiosInstance.get(`/api/songs`);
+        const res = await fetch("/api/songs",{
+                method:"GET",
+                headers:{
+                    "Content-Type":"application/json"
+                }
+        })  
+        let {songLists} = await res.json();
         // console.log(songLists)
         dispatch(getSongLists(songLists))
     }
