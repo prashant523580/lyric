@@ -5,13 +5,11 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { getSongByArtists } from "@/redux/actions/songlist.action";
-import MainLayout from "@/components/Main";
 import { useAppSelector } from "@/redux/store";
 import HTMLReactParser from "html-react-parser";
 import styles from "../../styles/Lyric.module.scss";
-import Link from "next/link";
-import Divider from "@/components/Divider";
+// import Link from "next/link";
+// import Divider from "@/components/Divider";
 import Chord from '@tombatossals/react-chords/lib/Chord';
 import GuitarChordsData from "@tombatossals/chords-db/lib/guitar.json"
 import UkuleleChordsData from "@tombatossals/chords-db/lib/ukulele.json";
@@ -147,7 +145,7 @@ function Songs(props: any) {
     React.useEffect(() => {
         setCurrentGuitarChords(getInstrumentChord(guitarChordsData))
         setCurrentUkuleleChords(getInstrumentChord(ukuleleChordsData))
-    }, [chords])
+    }, [chords,guitarChordsData,ukuleleChordsData])
     // const transposeChord = (chord: any, amount: any) => {
     //     return chord.replace(/[CDEFGAB]#?/g,
     //         function (match: any) {
@@ -326,10 +324,10 @@ function Songs(props: any) {
                         <span onClick={() => setShowChordChart(false)}>ESC</span>
                     </div>
                     <div className="flex flex-wrap justify-center  h-[550px] overflow-y-auto">
-                        {chord.positions.map((chord :any) => {
+                        {chord.positions.map((chord :any,ind:number) => {
                            
                             return( 
-                            <div className="">
+                            <div className="" key={ind}>
                                 <Chord lite={false} instrument={instrument} chord={chord}/>
                                  </div>
                                 )
