@@ -4,7 +4,6 @@ import axios from "axios";
 // import { authConstants } from "../actions/constant";
 
 import { api } from "../urlConfig";
-// import store from "../store/index";
 let token ;
 if(typeof window !== "undefined"){
 

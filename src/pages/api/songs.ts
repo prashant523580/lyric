@@ -2,7 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {
-    songLists :any
+    songLists: any
 }
 const songLists = [
     {
@@ -14,11 +14,12 @@ const songLists = [
         "key": "E major",
         "strum": "D &nbsp;PD&nbsp; -U&nbsp; P",
         "chords": [
-            { "chord": "E", "quality": "MAJ" },
-            { "chord": "F#", "quality": "MIN" },
-            { "chord": "Asus2", "quality": "" },
-            { "chord": "C#", "quality": "MIN" },
-            { "chord": "B", "quality": "MAJ" }]
+            { "chord": "E", "suffix": "major" },
+            { "chord": "F#", "suffix": "minor" },
+            { "chord": "A", "suffix": "sus2" },
+            { "chord": "C#", "suffix": "minor" },
+            { "chord": "B", "suffix": "major" }
+        ]
     },
     {
         "artist": "1974AD",
@@ -28,16 +29,17 @@ const songLists = [
         "tempo": "157bpm",
         "key": "A minor",
         "strum": "D &nbsp;D&nbsp;UUD&nbsp; DUP",
-        "chords": [{ "chord": "A", "quality": "MIN" },
-        { "chord": "C", "quality": "MAJ" },
-        { "chord": "D", "quality": "MIN" },
-        { "chord": "E", "quality": "MAJ" },
-        { "chord": "F", "quality": "MAJ" },
-        { "chord": "G", "quality": "MAJ" }
+        "chords": [
+            { "chord": "A", "suffix": "minor" },
+            { "chord": "F", "suffix": "major" },
+            { "chord": "G", "suffix": "major" },
+            { "chord": "C", "suffix": "major" },
+            { "chord": "E", "suffix": "major" },
+            { "chord": "D", "suffix": "minor" }
         ]
     },
     {
-        "artist":"Aastha",
+        "artist": "Aastha",
         "songname": "Harpal Tyo Timrai",
         "lyricChord": '[g]&nbsp;harpal tyo timrai muska[em]ko, yaada le[c] satauchha ane pi[d]rolchha malae,[g]nashalu ti timro tyo ka[em]alo kesh le, mero [c]bhoka pyaasha sabai lu[d]tyo oh ho \n [g]&nbsp;padne belama pan[em]ii ma \n kina h[c]o yesari sadhain to[d]lai rahanchu',
         "beat": "4/4",
@@ -45,14 +47,13 @@ const songLists = [
         "key": "G major",
         "strum": "D &nbsp;DU&nbsp; -U&nbsp; DU",
         "chords": [
-            { "chord": "E", "quality": "MAJ" },
-            { "chord": "F#", "quality": "MIN" },
-            { "chord": "Asus2", "quality": "MAJ" },
-            { "chord": "C#", "quality": "MIN" },
-            { "chord": "B", "quality": "MAJ" }]
+            { "chord": "G", "suffix": "major" },
+            { "chord": "E", "suffix": "minor" },
+            { "chord": "C", "suffix": "major" },
+            { "chord": "D", "suffix": "major" },]
     },
     {
-        "artist":"ugesh limbu",
+        "artist": "ugesh limbu",
         "songname": "Hamro Geet",
         "lyricChord": '[C]Sochchu aaja ma prash[G]na, \n' +
             '[Dm]Kina ho laddai [F]chhu ma aafai bhitra[C],\n',
@@ -61,11 +62,11 @@ const songLists = [
         "key": "G major",
         "strum": "D &nbsp;DU&nbsp; -U&nbsp; DU",
         "chords": [
-            { "chord": "C", "quality": "MAJ" },
-            { "chord": "G", "quality": "MIN" },
-            { "chord": "Asus2", "quality": "MAJ" },
-            { "chord": "C#", "quality": "MIN" },
-            { "chord": "B", "quality": "MAJ" }]
+            { "chord": "C", "quality": "major" },
+            { "chord": "G", "quality": "minor" },
+            { "chord": "A", "quality": "sus2" },
+            { "chord": "C#", "quality": "minor" },
+            { "chord": "B", "quality": "major" }]
     },
 ]
 const lyricChords = [
@@ -103,7 +104,7 @@ const lyricChords = [
                 ]
             }
         ]
-    }, 
+    },
     {
 
         "artist": "Astha",
@@ -148,12 +149,12 @@ const lyricChords = [
         ]
     }
 ]
-export default async function  handler(
+export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse<Data>
 ) {
     console.log(req.method)
-    if(req.method == "GET"){
+    if (req.method == "GET") {
 
         res.status(200).json({ songLists })
     }

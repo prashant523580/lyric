@@ -9,18 +9,15 @@ import { Provider } from 'react-redux'
 import Loading from './Loading'
 
 export default function App({ Component, pageProps }: AppProps) {
- 
-  return( 
-  <Suspense fallback={<Loading/>}
-   >
 
-  <Provider store={store}>
-            <Navbar/>
-<MainLayout>
-
-               <Component {...pageProps} />
-</MainLayout>
-        </Provider>
-  </Suspense>
+  return (
+    <Suspense fallback={<Loading />}>
+      <Provider store={store}>
+        <Navbar/>
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
+      </Provider>
+    </Suspense>
   )
 }
