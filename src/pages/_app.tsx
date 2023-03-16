@@ -1,8 +1,8 @@
 
-import MainLayout from '@/components/Main'
-import Navbar from '@/components/Navbar/index'
-import store from '@/redux/store'
-import '@/styles/globals.css'
+import MainLayout from 'components/Main'
+import Navbar from 'components/Navbar/index'
+import store from "redux/store"
+import 'styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Suspense } from 'react'
 import { Provider } from 'react-redux'

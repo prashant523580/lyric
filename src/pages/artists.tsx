@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { getSongByArtists } from "@/redux/actions/songlist.action";
-import MainLayout from "@/components/Main";
-import { useAppSelector } from "@/redux/store";
+import { getSongByArtists } from "redux/actions/songlist.action";
+import MainLayout from "components/Main";
+import { useAppSelector } from "redux/store";
 import HTMLReactParser from "html-react-parser";
 function Songs(props: any) {
     // const navigate = useNavigate();

@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "@/redux/store";
+import { useAppSelector } from "redux/store";
 import HTMLReactParser from "html-react-parser";
 import styles from "../../styles/Lyric.module.scss";
 // import Link from "next/link";

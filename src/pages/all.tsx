@@ -3,8 +3,8 @@ import Link from "next/link";
 import {useRouter}from "next/router"
 import {useDispatch, useSelector} from "react-redux";
 import {useState, useEffect} from "react";
-import { useAppSelector } from "@/redux/store";
-import MainLayout from "@/components/Main";
+import { useAppSelector } from "redux/store";
+import MainLayout from "components/Main";
 // import {getAllLyricChords} from "../../redux/actions/index.action";
 const lyricChords = [
 	{

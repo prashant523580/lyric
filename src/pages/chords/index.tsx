@@ -1,4 +1,4 @@
-import MainLayout from '@/components/Main'
+import MainLayout from 'components/Main'
 import Link from 'next/link'
 import React from 'react'
 
