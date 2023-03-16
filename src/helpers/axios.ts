@@ -1,5 +1,5 @@
 
-import store from "@/redux/store";
+import store from "redux/store";
 import axios from "axios";
 // import { authConstants } from "../actions/constant";
 
