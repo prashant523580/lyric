@@ -6,7 +6,7 @@ const songLists = [
     {
         "artist": "1974AD",
         "songname": "Parelima",
-        "lyricChord": '[E]Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]rakhana, [E]anga[F#m]loma [Asus2]bandhi [E]rakhana  ',
+        "lyricChord": '[E] Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]raakha na, [E] anga[F#m]loma [Asus2]bandhi [E]raakha, [E] Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]raakha na, [E] anga[F#m]loma [Asus2]bandhi [E]raakha,,[E] Jaana [F#m]nadeu  [Asus2] &nbsp;roka [E]na rokha, [E] Udna[F#m] nadeu [Asus2] aakash ko chari jastai  [E]malai,,, [C#m] Bandhera raakha timrai [B]mutuma, [C#m] yo ta timrai dhadhkana h[B]o, [C#m] Saachera raakha timrai [B]aakhama, [A] yo ta timrai sahara h[B]o,,, [E] mana [F#m]bhitra  [Asus2]saanchi &nbsp; &nbsp;[E]raakha na, [E] aakha[F#m]bhitra [Asus2]aljhai [E]raakha,[E] mana [F#m]bhitra  [Asus2]saanchi &nbsp; &nbsp;[E]raakha na, [E] aakha[F#m]bhitra [Asus2]aljhai [E]raakha,,[E]ramna [F#m]deu na  [Asus2] &nbsp;timrai [E]aankha ma, [E] baas[F#m] basna deu [Asus2] timro hridaya ko dhukdhu[E]ki ma,,, [C#m] Bandhera rakha timrai [B]mutuma, [C#m] yo ta timrai dhadhkana h[B]o, [C#m] Saachera rakha timrai [B]aakhama, [A] yo ta timrai sahara h[B]o,,, [E] Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]raakha na, [E] anga[F#m]loma [Asus2]bandhi [E]raakha, [E] Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]raakha na, [E] anga[F#m]loma [Asus2]bandhi [E]raakha,,',
         "beat": "4/4",
         "tempo": "93bpm",
         "key": "E major",

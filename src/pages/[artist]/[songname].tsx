@@ -13,6 +13,7 @@ import styles from "../../styles/Lyric.module.scss";
 import Chord from '@tombatossals/react-chords/lib/Chord';
 import GuitarChordsData from "@tombatossals/chords-db/lib/guitar.json"
 import UkuleleChordsData from "@tombatossals/chords-db/lib/ukulele.json";
+import { getAllSongLists } from "redux/actions/songlist.action";
 interface ChordSuffixTypes {
     chord: string,
     suffix: string
@@ -30,34 +31,6 @@ interface LyricChordTypes {
     songname: string
     strum: string
     tempo: string
-}
-import GuitarChord from 'react-guitar-chord';
-
-
-const GuitarChordComponent = (props: any) => {
-    const chord = {
-        frets: [1, 3, 3, 2, 1, 1],
-        fingers: [1, 3, 4, 2, 1, 1],
-        barres: [1],
-        capo: false,
-    }
-    const instrument = {
-        strings: 6,
-        fretsOnChord: 4,
-        name: 'Guitar',
-        keys: [],
-        tunings: {
-            standard: ['E', 'A', 'D', 'G', 'B', 'E']
-        }
-    }
-    const lite = false // defaults to false if omitted
-    return (
-        <Chord
-            chord={chord}
-            instrument={instrument}
-            lite={lite}
-        />
-    )
 }
 const GenerateChordLyric = ({ str }: any) => {
 
@@ -107,7 +80,9 @@ function Songs(props: any) {
     })
     let guitarChordsData: any = GuitarChordsData.chords;
     let ukuleleChordsData: any = UkuleleChordsData.chords;
-
+    React.useEffect(() => {
+        dispatch(getAllSongLists())
+    },[dispatch])
     React.useEffect(() => {
         let { artist, songname } = router.query;
         if (songs.length > 0) {
@@ -142,10 +117,10 @@ function Songs(props: any) {
     }
 
     React.useEffect(() => {
-        updateTranspose(0)
         setChords(currentArtistSong.chords)
+    
     }, [currentArtistSong])
-
+    
     React.useEffect(() => {
         setCurrentGuitarChords(getInstrumentChord(guitarChordsData))
         setCurrentUkuleleChords(getInstrumentChord(ukuleleChordsData))
@@ -173,7 +148,6 @@ function Songs(props: any) {
                 span.innerHTML = transposeChord(currentChord, n)
             }
         })
-
         let chordArray: any = chords.map((chord: any) => {
             return {
                 chord: transposeChord(chord.chord, n),
@@ -181,9 +155,8 @@ function Songs(props: any) {
             }
         })
         let transposedChord: any = chordArray.map(({ chord, suffix }: any) => {
-            if (isGuitarChord) {
-
-
+          
+            if (isGuitarChord === true ) {
                 if (chord == "A#") {
                     chord = "Bb";
                 } else if (chord == "D#") {
@@ -207,7 +180,140 @@ function Songs(props: any) {
                 } else {
                     chord = chord
                 }
-            } else {
+            } else if(isGuitarChord === false) {
+                if (chord == "A#") {
+                    chord = "Bb";
+                } else if (chord == "D#") {
+                    chord = "Eb"
+                } else if (chord == "G#") {
+                    chord = "Ab"
+                } else if (chord == "B") {
+                    chord = "B"
+                } else if (chord == "A") {
+                    chord = "A"
+                } else if (chord == "C") {
+                    chord = "C"
+                } else if (chord == "D") {
+                    chord = "D"
+                } else if (chord == "G") {
+                    chord = "G"
+                } else if (chord == "E") {
+                    chord = "E"
+                } else if (chord == "F") {
+                    chord = "F"
+                } else if (chord == "C#") {
+                    chord = "Db"
+                } else if (chord == "F#") {
+                    chord = "Gb"
+                } else {
+                    chord = chord
+                }
+            }
+            return {
+                chord,
+                suffix
+            }
+        });
+        setChords(transposedChord);
+       
+    }
+    React.useEffect(() => {
+        let transposedChord: any = chords.map(({ chord, suffix }: any) => {
+          
+            if (isGuitarChord ) {
+                if (chord == "A#") {
+                    chord = "Bb";
+                } else if (chord == "D#") {
+                    chord = "Eb"
+                } else if (chord == "G#") {
+                    chord = "Ab"
+                } else if (chord == "B") {
+                    chord = "B"
+                } else if (chord == "A") {
+                    chord = "A"
+                } else if (chord == "C") {
+                    chord = "C"
+                } else if (chord == "D") {
+                    chord = "D"
+                } else if (chord == "G") {
+                    chord = "G"
+                } else if (chord == "E") {
+                    chord = "E"
+                } else if (chord == "F") {
+                    chord = "F"
+                } else {
+                    chord = chord
+                }
+            } else if(isGuitarChord === false) {
+                if (chord == "A#") {
+                    chord = "Bb";
+                } else if (chord == "D#") {
+                    chord = "Eb"
+                } else if (chord == "G#") {
+                    chord = "Ab"
+                } else if (chord == "B") {
+                    chord = "B"
+                } else if (chord == "A") {
+                    chord = "A"
+                } else if (chord == "C") {
+                    chord = "C"
+                } else if (chord == "D") {
+                    chord = "D"
+                } else if (chord == "G") {
+                    chord = "G"
+                } else if (chord == "E") {
+                    chord = "E"
+                } else if (chord == "F") {
+                    chord = "F"
+                } else if (chord == "C#") {
+                    chord = "Db"
+                } else if (chord == "F#") {
+                    chord = "Gb"
+                } else {
+                    chord = chord
+                }
+            }
+            return {
+                chord,
+                suffix
+            }
+        });
+        setChords(transposedChord);
+    },[isGuitarChord,chords])
+    const getTransposedChords = (n :any) => {
+        // let chordArray: any = chords.map((chord: any) => {
+        //     return {
+        //         chord: transposeChord(chord.chord, n),
+        //         suffix: chord.suffix
+        //     }
+        // })
+        let transposedChord: any = chords.map(({ chord, suffix }: any) => {
+            console.log(isGuitarChord)
+            if (isGuitarChord === true) {
+                if (chord == "A#") {
+                    chord = "Bb";
+                } else if (chord == "D#") {
+                    chord = "Eb"
+                } else if (chord == "G#") {
+                    chord = "Ab"
+                } else if (chord == "B") {
+                    chord = "B"
+                } else if (chord == "A") {
+                    chord = "A"
+                } else if (chord == "C") {
+                    chord = "C"
+                } else if (chord == "D") {
+                    chord = "D"
+                } else if (chord == "G") {
+                    chord = "G"
+                } else if (chord == "E") {
+                    chord = "E"
+                } else if (chord == "F") {
+                    chord = "F"
+                } else {
+                    chord = chord
+                }
+            } else if(isGuitarChord === false) {
                 if (chord == "A#") {
                     chord = "Bb";
                 } else if (chord == "D#") {
@@ -388,7 +494,10 @@ function Songs(props: any) {
                     <div className={"bg-gray-200 p-2 " }>
                         <div> 
                             <p> Chord: {isGuitarChord ? "Guitar Chords" : "Ukulele Chords"}</p>
-                        <Button onClick={() => setIsguitarChord(!isGuitarChord)}>{isGuitarChord ? "Guitar" : "Ukulele"}</Button>
+                        <Button onClick={() => {
+                        
+                            setIsguitarChord(!isGuitarChord)
+                            }}>{isGuitarChord ? "Guitar" : "Ukulele"}</Button>
                         </div>
                         {/* display chord by instrument */}
                         {
