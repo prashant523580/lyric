@@ -88,10 +88,10 @@ function GuitarChords() {
   return (
     <Layout>
     <div className="chord-container px-4">
-      <Link href="/chords/ukulele">Ukulele Chords</Link>
-      <div className="flex space-x-2">
-      <div>
-        <h1>select chords:</h1>
+      <Link className="border-b my-3" href="/chords/ukulele">Ukulele Chords</Link>
+      <div className="flex space-x-2 my-2 bg-gray-800 p-4 items-center">
+      <div className={"flex space-x-2 items-center"} >
+        <h1 className="text-white capitalize">select chords:</h1>
         <select style={styles.inputControl} value={selectedChord.chord} name={"chord"} onChange={handleChord}>
           {
             GuitarChordsData && Object.keys(GuitarChordsData).map((key, ind) =>
@@ -100,8 +100,8 @@ function GuitarChords() {
           }
         </select>
       </div>
-      <div>
-        <h1>Select Suffix</h1>
+      <div className={"flex space-x-2 items-center"} >
+        <h1 className="text-white capitalize">Select Suffix</h1>
         <select style={styles.inputControl} onChange={handleChord} value={selectedChord.suffix} name={"suffix"}>
           <option> all </option>
           {
@@ -127,7 +127,7 @@ function GuitarChords() {
               }}>
                 <h3>{chord.key} {chord.suffix}</h3>
               </div>
-              <div className={"flex"}>
+              <div className={"grid grid-cols-2 lg:px-6 max-md:px-2  gap-x-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:gap-x-2"}>
 
                 {
                   chord.positions.map((pos: any, ind: number) => {

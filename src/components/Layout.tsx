@@ -7,7 +7,7 @@ import React, { useEffect } from 'react'
 export default function Layout(props: any) {
     
     return (
-        <div className={styles.slide}>
+        <div className={styles.slide }>
             {props.children}
         </div>
     )

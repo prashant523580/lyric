@@ -16,6 +16,8 @@ import UkuleleChordsData from "@tombatossals/chords-db/lib/ukulele.json";
 import { getAllSongLists } from "redux/actions/songlist.action";
 import Layout from "components/Layout";
 import MainLayout from "components/Main";
+import Divider from "components/Divider";
+import Link from "next/link";
 interface ChordSuffixTypes {
     chord: string,
     suffix: string
@@ -414,7 +416,7 @@ function Songs(props: any) {
         const lite = false
 
         return (
-            <div className="mt-6 overflow-x-auto w-full grid grid-cols-3 lg:px-6 max-md:px-2  gap-x-2 sm:grid-cols3 md:grid-cols-4 lg:grid-cols-6 xl:gap-x-2">
+            <div className="mt-6 overflow-x-auto w-full grid grid-cols-3 lg:px-6 max-md:px-2  gap-x-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:gap-x-2">
 
                 {
                     chords.map((chord: any, ind: number) => {
@@ -539,20 +541,20 @@ function Songs(props: any) {
                             <GenerateChordLyric str={currentArtistSong?.lyricChord} />
                         </div>
                     </div>
-                    <div className="flex flex-col items-center w-1/2">
-                        {/* <div className=" px-2 py-3">
-                            <div className=" flex flex-col items-center my-2">
-                                <h1 className="text-xl font-bold">Related Lyric and Chordss  </h1>
+                    <div className="flex flex-col items-center w-1/3">
+                        <div className=" px-2 py-3">
+                            <div className=" flex flex-col  my-2">
+                                <h1 className="text-l font-bold">Related Lyric and Chords </h1>
                                 <Divider />
                             </div>
-                            <div className="px-2 flex flex-col bg-gray-400 ">
+                            <div className="px-2 flex flex-col rounded-md    bg-gray-400 ">
                                 {currentArtistAllSong && currentArtistAllSong.map((item: any, ind: number) => {
                                     return (
-                                        <Link className=" border-b my-1 border-blue-600" key={ind} href={`/${item.artist}/${item.songname}`}>{item.songname}</Link>
+                                        <Link className=" my-1 text-white" key={ind} href={`/${item.artist}/${item.songname}`}>{item.songname}</Link>
                                     )
                                 })}
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
                 <div className="fixed bottom-0 left-0 w-full flex justify-center items-center bg-black">

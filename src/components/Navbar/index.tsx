@@ -30,7 +30,7 @@ const navLink = [
     path:"/artists"
     },
     {
-    label: "Chords",
+    label: "Chords Library",
     path:"/chords"
     },
 ]
@@ -38,8 +38,10 @@ const navLink = [
 function ActiveLink({ children, href } : any) {
     const router = useRouter();
     const style = {
+        padding: 10,
       marginRight: 10,
       color: router.asPath === href ? 'green' : 'black',
+      boxShadow:  router.asPath === href ? "inset 0 -2px 0 0 green" : "none"
     }
   
     const handleClick = (e : any) => {

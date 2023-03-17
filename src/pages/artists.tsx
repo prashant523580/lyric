@@ -57,12 +57,12 @@ function Songs(props: any) {
             <div className={" px-4 py-4"} >
                 {artistCategories.map((item: any, ind: number) => {
                     return (
-                        <div className={"bg-gray-700 my-2 px-2 py-2 text-white rounded-md cursor-pointer active:bg-gray-600"}
+                        <div className={"bg-gray-800 my-2 px-2 py-2 text-white rounded-md cursor-pointer active:bg-gray-600"}
                             key={ind}
                             onClick={() => handleArtistSongList(item)}
                         >
-                            <h4 className="text-green-400">{item}</h4>
-                            <p>songs: {getLength(item)}</p>
+                            <h4 className="text-gray-300">{item}</h4>
+                            <p className="text-white">songs: {getLength(item)}</p>
                         </div>)
                 })}
 

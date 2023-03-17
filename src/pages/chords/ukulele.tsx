@@ -96,11 +96,11 @@ function UkeleleChords() {
     <Layout>
 
     <div className="chord-container px-4" >
-      <Link href={"/chords/guitar"}>Guitar Chords</Link>
-      <div className="flex space-x-4">
-        <div>
+      <Link className="border-b my-3" href={"/chords/guitar"}>Guitar Chords</Link>
+      <div className="flex space-x-4 my-2 bg-gray-800 p-4">
+        <div className="flex space-x-2 items-center">
 
-          <h1>Chord</h1>
+          <h1 className="text-white capitalize"> select Chord</h1>
           <select
             value={selectedChord.chord}
             onChange={handleChord}
@@ -114,8 +114,8 @@ function UkeleleChords() {
             }
           </select>
         </div>
-        <div>
-          <h1>suffix </h1>
+        <div className="flex space-x-2 items-center">
+          <h1 className="text-white capitalize">select suffix </h1>
           <select
             value={selectedChord.suffix}
             name={"suffix"}
@@ -144,8 +144,7 @@ function UkeleleChords() {
               }}>
                 <h3>{chord.key} {chord.suffix}</h3>
               </div>
-              <div className="flex">
-
+              <div className={"grid grid-cols-2 lg:px-6 max-md:px-2  gap-x-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:gap-x-2"}>
                 {
                   chord.positions.map((pos: any, ind: number) => {
                     return (<Chord lite={lite} key={ind} instrument={instrument} chord={pos} />)

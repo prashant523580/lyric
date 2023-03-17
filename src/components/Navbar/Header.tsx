@@ -16,7 +16,7 @@ export default class Header extends React.Component{
                 {/* <img src="/logo.png" alt="logo" width={200} height={150} /> */}
                 <h1>Lyric</h1>
             </div>
-            <div className={styles.contact_container}>
+            {/* <div className={styles.contact_container}>
                 <div className={styles.contact}>
                     <LocationOnOutlined />
                     <div className="info">
@@ -38,7 +38,7 @@ export default class Header extends React.Component{
                         <p>example@gmail.com</p>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
         )
     }

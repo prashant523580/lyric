@@ -25,8 +25,8 @@ function HomePage() {
     <div className="pt-10 px-5" >
         {lyricChords.map((item : any, ind :number) => {
             return (
-                <div key={ind} className="bg-gray-800 px-5 my-4 cursor-pointer hover:bg-gray-500 active:bg-gray-600" onClick={() => handleArtistSongLists(item)}>
-                <h1 className="text-green-400">{item.songname}</h1>
+                <div key={ind} className="bg-gray-800 px-5 my-4 cursor-pointer hover:bg-gray-700 active:bg-gray-600" onClick={() => handleArtistSongLists(item)}>
+                <h1 className="text-gray-300">{item.songname}</h1>
                 <p  className="text-white">{item.artist}</p>
                 </div>
                 )
