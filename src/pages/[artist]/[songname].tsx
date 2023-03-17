@@ -87,10 +87,12 @@ function Songs(props: any) {
         strum: "",
         tempo: ""
     });
+
     const [currentGuitarChords, setCurrentGuitarChords] = React.useState<Array<object>>([]);
     const [currentUkuleleChords, setCurrentUkuleleChords] = React.useState<Array<object>>([]);
     const [chords, setChords] = React.useState<Array<object>>([]);
-    const [showChordChart, setShowChordChart] = React.useState(false);
+    const [showChordPositionChart, setShowChordPositionChart] = React.useState(false);
+    const [isShowChart, setIsShowChart] = React.useState(false);
     const [currentChordPositions, setCurrentChordPositions] = React.useState<any>()
     const [currentArtistAllSong, setCurrentArtistAllSong] = useState<any>([]);
     const chordRef = React.useRef<any>();
@@ -105,10 +107,9 @@ function Songs(props: any) {
     })
     let guitarChordsData: any = GuitarChordsData.chords;
     let ukuleleChordsData: any = UkuleleChordsData.chords;
+
     React.useEffect(() => {
         let { artist, songname } = router.query;
-        // console.log(router)
-        // console.log(artistSongs)
         if (songs.length > 0) {
             let artistSongs: any = [];
             songs.filter((item: any) => {
@@ -118,10 +119,10 @@ function Songs(props: any) {
                 if (item.artist === artist) {
                     artistSongs.push(item)
                 }
-                // console.log(item)
             })
             setCurrentArtistAllSong(artistSongs)
         }
+
     }, [songs, router])
 
     const getInstrumentChord = (instrument: any) => {
@@ -139,22 +140,17 @@ function Songs(props: any) {
         return chordSuffixObject
         // setcurrentGuitarChords(chordSuffixObject)
     }
+
     React.useEffect(() => {
+        updateTranspose(0)
         setChords(currentArtistSong.chords)
     }, [currentArtistSong])
+
     React.useEffect(() => {
         setCurrentGuitarChords(getInstrumentChord(guitarChordsData))
         setCurrentUkuleleChords(getInstrumentChord(ukuleleChordsData))
-    }, [chords,guitarChordsData,ukuleleChordsData])
-    // const transposeChord = (chord: any, amount: any) => {
-    //     return chord.replace(/[CDEFGAB]#?/g,
-    //         function (match: any) {
-    //             //alert(match)
-    //             var i = (options.scales.indexOf(match) + amount) % options.scales.length;
-    //             return options.scales[i < 0 ? i + options.scales.length : i];
-    //         }
-    //     );
-    // }
+    }, [guitarChordsData, ukuleleChordsData, chords])
+
     const transposeChord = (chord: string, amount: number) => {
         // console.log(typeof(chord), typeof(amount))
         var normalizeMap: any = { "Cb": "B", "Db": "C#", "Eb": "D#", "Fb": "E", "Gb": "F#", "Ab": "G#", "Bb": "A#", "E#": "F", "B#": "C" }
@@ -177,48 +173,75 @@ function Songs(props: any) {
                 span.innerHTML = transposeChord(currentChord, n)
             }
         })
-        let fakeArray: any = [];
-        let chArr = chords.map(({ chord, suffix }: any) => {
 
-            // console.log(chord)
-            if (chord == "A#") {
-                chord = "Bb";
-            } else if (chord == "D#") {
-                chord = "Eb"
-            } else if (chord == "G#") {
-                chord = "Ab"
-            } else if (chord == "B") {
-                chord = "B"
-            } else if (chord == "A") {
-                chord = "A"
-            } else if (chord == "C") {
-                chord = "C"
-            } else if (chord == "D") {
-                chord = "D"
-            } else if (chord == "G") {
-                chord = "G"
-            } else if (chord == "E") {
-                chord = "E"
-            } else if (chord == "F") {
-                chord = "F"
-            } else {
-                // chord = chord
+        let chordArray: any = chords.map((chord: any) => {
+            return {
+                chord: transposeChord(chord.chord, n),
+                suffix: chord.suffix
             }
-            // fakeArray.push({
-            //     chord: transposeChord(chord, n),
-            //     suffix: suffix
-            // })
-            // console.log(chord)
-
-            return { chord: transposeChord(chord, n), suffix }
         })
-        console.log(chArr)
-        // console.log(guitarChordsData)
-        // console.log(ukuleleChordsData)
-        // setChords(chArr)
-        // chords.map((chord))
-        // console.log(suffixChord)
+        let transposedChord: any = chordArray.map(({ chord, suffix }: any) => {
+            if (isGuitarChord) {
 
+
+                if (chord == "A#") {
+                    chord = "Bb";
+                } else if (chord == "D#") {
+                    chord = "Eb"
+                } else if (chord == "G#") {
+                    chord = "Ab"
+                } else if (chord == "B") {
+                    chord = "B"
+                } else if (chord == "A") {
+                    chord = "A"
+                } else if (chord == "C") {
+                    chord = "C"
+                } else if (chord == "D") {
+                    chord = "D"
+                } else if (chord == "G") {
+                    chord = "G"
+                } else if (chord == "E") {
+                    chord = "E"
+                } else if (chord == "F") {
+                    chord = "F"
+                } else {
+                    chord = chord
+                }
+            } else {
+                if (chord == "A#") {
+                    chord = "Bb";
+                } else if (chord == "D#") {
+                    chord = "Eb"
+                } else if (chord == "G#") {
+                    chord = "Ab"
+                } else if (chord == "B") {
+                    chord = "B"
+                } else if (chord == "A") {
+                    chord = "A"
+                } else if (chord == "C") {
+                    chord = "C"
+                } else if (chord == "D") {
+                    chord = "D"
+                } else if (chord == "G") {
+                    chord = "G"
+                } else if (chord == "E") {
+                    chord = "E"
+                } else if (chord == "F") {
+                    chord = "F"
+                } else if (chord == "C#") {
+                    chord = "Db"
+                } else if (chord == "F#") {
+                    chord = "Gb"
+                } else {
+                    chord = chord
+                }
+            }
+            return {
+                chord,
+                suffix
+            }
+        });
+        setChords(transposedChord);
     }
     const updateSpeed = (e: any) => {
         setOptions((pre: any) => {
@@ -228,13 +251,15 @@ function Songs(props: any) {
             }
         })
     }
-    // const [artistSongs, setArtistSong] = useState(songs);
+
 
     //Render Chord Chart by instument  
-    const RenderCurrentInstrumentChords = ({ chords,instrumentName }: ChordsTypes) => {
-        let instrument : any ={}
-        console.log(instrumentName)
-        if(instrumentName === "Guitar"){
+    const RenderCurrentInstrumentChords = ({ chords, instrumentName }: ChordsTypes) => {
+        let instrument: any = {}
+        // console.log(instrumentName)
+        if (instrumentName === "Guitar") {
+            // console.log(chords)
+
             instrument = {
                 strings: 6,
                 fretsOnChord: 4,
@@ -244,15 +269,16 @@ function Songs(props: any) {
                     standard: ['E', 'A', 'D', 'G', 'B', 'E']
                 }
             }
-        }else{
-            instrument ={
+        } else {
+            // console.log(chords);
+            instrument = {
                 strings: 4,
-            fretsOnChord: 4,
-            name: 'Ukulele',
-            keys: [],
-            tunings: {
-                standard: ["G", "C", "E", "A"]
-            }
+                fretsOnChord: 4,
+                name: 'Ukulele',
+                keys: [],
+                tunings: {
+                    standard: ["G", "C", "E", "A"]
+                }
             }
         }
         const lite = false
@@ -265,7 +291,7 @@ function Songs(props: any) {
 
                         return (
                             <div className="relative border my-1 cursor-pointer" key={ind} onClick={() => {
-                                setShowChordChart(true),
+                                setShowChordPositionChart(true),
                                     setCurrentChordPositions(chord)
                             }}>
                                 <Chord chord={chord.positions[0]} lite={lite} instrument={instrument} />
@@ -278,10 +304,10 @@ function Songs(props: any) {
         )
     }
     // render chords all positions
-    const RenderChordPositions = ({ chord ,instrumentName }: any) => {
-        let instrument : any ={}
+    const RenderChordPositions = ({ chord, instrumentName }: any) => {
+        let instrument: any = {}
         console.log(instrumentName)
-        if(instrumentName === "Guitar"){
+        if (instrumentName === "Guitar") {
             instrument = {
                 strings: 6,
                 fretsOnChord: 4,
@@ -291,64 +317,61 @@ function Songs(props: any) {
                     standard: ['E', 'A', 'D', 'G', 'B', 'E']
                 }
             }
-        }else{
-            instrument ={
+        } else {
+            instrument = {
                 strings: 4,
-            fretsOnChord: 4,
-            name: 'Ukulele',
-            keys: [],
-            tunings: {
-                standard: ["G", "C", "E", "A"]
-            }
+                fretsOnChord: 4,
+                name: 'Ukulele',
+                keys: [],
+                tunings: {
+                    standard: ["G", "C", "E", "A"]
+                }
             }
         }
-      
+
         return (
             <>
 
                 <Modal
                     disableScrollLock={true}
-                    open={showChordChart}
-                    onClose={() => setShowChordChart(false)}
+                    open={showChordPositionChart}
+                    onClose={() => setShowChordPositionChart(false)}
                     sx={{
                         pr: "0 !important",
-                        overflowY:"auto"
+                        overflowY: "auto"
                     }}
-                    // aria-labelledby="modal-modal-title"
-                    // aria-describedby="modal-modal-description"
+                // aria-labelledby="modal-modal-title"
+                // aria-describedby="modal-modal-description"
                 >
-                    
-                <div className="absolute top-[50%] left-[50%] p-4 -translate-x-[50%] -translate-y-[50%] bg-white border-none">
-                    <div className="flex justify-between">
-                        <h1>{chord.key +" "+ chord.suffix} </h1>
-                        <span onClick={() => setShowChordChart(false)}>ESC</span>
-                    </div>
-                    <div className="flex flex-wrap justify-center  h-[550px] overflow-y-auto">
-                        {chord.positions.map((chord :any,ind:number) => {
-                           
-                            return( 
-                            <div className="" key={ind}>
-                                <Chord lite={false} instrument={instrument} chord={chord}/>
-                                 </div>
+
+                    <div className="absolute top-[50%] left-[50%] p-4 -translate-x-[50%] -translate-y-[50%] bg-white border-none">
+                        <div className="flex justify-between">
+                            <h1>{chord.key + " " + chord.suffix} </h1>
+                            <span onClick={() => setShowChordPositionChart(false)}>ESC</span>
+                        </div>
+                        <div className="flex flex-wrap justify-center  h-[550px] overflow-y-auto">
+                            {chord.positions.map((chord: any, ind: number) => {
+
+                                return (
+                                    <div className="" key={ind}>
+                                        <Chord lite={false} instrument={instrument} chord={chord} />
+                                    </div>
                                 )
-                        })}
+                            })}
+                        </div>
                     </div>
-                </div>
                 </Modal>
 
             </>
         )
     }
+    // const RenderCurrentInstrumentChords = ({chords,instrumentName}) => {
+
+    // }
     return (
         <>
 
-            <div className={"px-4 "} style={{ paddingTop: "55px" }}>
-                {/* {artistSongs.map((item :any, ind :number) => {
-            return (<div className={"item"} key={ind} onClick={() => handleLyricChord(item)}>
-                    <h4>{item.songname}</h4>
-                </div>)
-                
-            })} */}
+            <div className={"px-4 "} >
                 <div>
 
                     <h1>Artist : {currentArtistSong?.artist}</h1>
@@ -357,19 +380,29 @@ function Songs(props: any) {
                     <h2>Tempo: {currentArtistSong.tempo}</h2>
                     <h2>Key : {currentArtistSong.key}</h2>
                 </div>
-                <div>
-                    <Button onClick={() => setIsguitarChord(!isGuitarChord)}>{isGuitarChord ? "Guitar" : "Ukulele"}</Button>
-                  {/* display chord by instrument */}
-                        <RenderCurrentInstrumentChords instrumentName={isGuitarChord? "Guitar" : "Ukulele"} chords={isGuitarChord ? currentGuitarChords : currentUkuleleChords} />
-                    
-                  
-                    {/* modal view */}
-                    {showChordChart && <RenderChordPositions instrumentName={isGuitarChord ? "Guitar" : "Ukulele"} chord={currentChordPositions} />
-                    }
-                </div>
+                <Button onClick={() => setIsShowChart(!isShowChart)}>
+                    {!isShowChart ? "Show chord Chart" : "Hide Chord Chart"}
+                </Button>
+                {
+                    isShowChart &&
+                    <div className={"bg-gray-200 p-2 " }>
+                        <div> 
+                            <p> Chord: {isGuitarChord ? "Guitar Chords" : "Ukulele Chords"}</p>
+                        <Button onClick={() => setIsguitarChord(!isGuitarChord)}>{isGuitarChord ? "Guitar" : "Ukulele"}</Button>
+                        </div>
+                        {/* display chord by instrument */}
+                        {
+                            <RenderCurrentInstrumentChords instrumentName={isGuitarChord ? "Guitar" : "Ukulele"} chords={isGuitarChord ? currentGuitarChords : currentUkuleleChords} />
+                        }
+
+                        {/* modal view */}
+                        {showChordPositionChart && <RenderChordPositions instrumentName={isGuitarChord ? "Guitar" : "Ukulele"} chord={currentChordPositions} />
+                        }
+                    </div>
+                }
                 {/* <GuitarChordComponent/> */}
-                <div className="flex justify-around">
-                    <div className="w-2/2 px-4 max-md:px-1 ">
+                <div className="flex justify-around border-t my-3 py-4">
+                    <div className="w-2/2 px-4 pb-10 max-md:px-1 ">
                         <div ref={(node: any) => chordRef.current = node} className={styles.lyricChord}>
                             <GenerateChordLyric str={currentArtistSong?.lyricChord} />
                         </div>
@@ -390,15 +423,16 @@ function Songs(props: any) {
                         </div> */}
                     </div>
                 </div>
-                {/* <div className="fixed bottom-0 w-full flex justify-center items-center bg-black">
+                <div className="fixed bottom-0 left-0 w-full flex justify-center items-center bg-black">
 
                     <Button onClick={() => updateTranspose(-1)}>-</Button>
+                    <span className="text-white">{0}</span>
+                    <Button onClick={() => updateTranspose(1)}>+</Button>
                     <div>
-                        <label htmlFor="default-range" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default range</label>
+                        {/* <label htmlFor="default-range" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default range</label> */}
                         <input id="default-range" onChange={updateSpeed} type="range" value={options.speed} className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" />
                     </div>
-                    <Button onClick={() => updateTranspose(1)}>+</Button>
-                </div> */}
+                </div>
             </div>
         </>
     )
