@@ -102,7 +102,7 @@ function Songs(props: any) {
             })
             setCurrentArtistAllSong(artistSongs)
         }
-
+            setStep(0)
     }, [songs, router])
 
     const getInstrumentChord = (instrument: any) => {
