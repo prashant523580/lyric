@@ -174,7 +174,7 @@ export default class Navbar extends React.Component<{}, StateTypes>{
                                 <p>example@gmail.com</p>
                             </div>
                         </div>
-                        <div className={styles.social_content}>
+                        {/* <div className={styles.social_content}>
                             <h1>Follow us on social network</h1>
                             <div style={{
                                 display: 'flex',
@@ -185,7 +185,7 @@ export default class Navbar extends React.Component<{}, StateTypes>{
                                 <a className={styles.facebook + " " + styles.icon}> <FacebookRounded /></a>
                                 <a className={styles.instagram + " " + styles.icon}><Instagram /></a>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className={styles.actions} style={{
                         display: "flex",

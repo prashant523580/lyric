@@ -1,10 +1,13 @@
 import { Button } from '@mui/material'
+import Layout from 'components/Layout'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 export default function PageNotFound() {
   return (
+<Layout>
+
     <div className='h-[100vh]'> <div className="lg:px-24 lg:py-24 md:py-20 md:px-44 px-4 py-24 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16">
     <div className="xl:pt-24 w-full xl:w-1/2 relative pb-6 lg:pb-0">
         <div className="relative">
@@ -30,5 +33,6 @@ export default function PageNotFound() {
     </div>
 </div>
 </div>
+</Layout>
   )
 }

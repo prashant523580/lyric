@@ -3,6 +3,7 @@ import Chord from "@tombatossals/react-chords/lib/Chord";
 import GuitarChordData from "@tombatossals/chords-db/lib/guitar.json";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Layout from "components/Layout";
 // import {Button} from "@mui/material";
 // import { useDispatch, useSelector } from "react-redux";
 // import { GetAllGuitarChords } from "../../redux/actions/chord.action";
@@ -85,7 +86,7 @@ function GuitarChords() {
   }, [GuitarChordsData]);
   const lite = false;
   return (
-    // <NavigateLayout>
+    <Layout>
     <div className="chord-container px-4">
       <Link href="/chords/ukulele">Ukulele Chords</Link>
       <div className="flex space-x-2">
@@ -140,7 +141,7 @@ function GuitarChords() {
         }
       </div>
     </div>
-    // </NavigateLayout>
+     </Layout>
   )
 }
 export default GuitarChords;

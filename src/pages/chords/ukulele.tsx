@@ -3,6 +3,7 @@ import Chord from "@tombatossals/react-chords/lib/Chord";
 import UkeleleChordData from "@tombatossals/chords-db/lib/ukulele.json";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Layout from "components/Layout";
 // import {Box,Button,FormControl,Select,InputLabel,MenuItem} from "@mui/material";
 // import { useDispatch,useSelector } from "react-redux";
 
@@ -92,6 +93,8 @@ function UkeleleChords() {
   }, [UkeleleChordsData]);
   const lite = false;
   return (
+    <Layout>
+
     <div className="chord-container px-4" >
       <Link href={"/chords/guitar"}>Guitar Chords</Link>
       <div className="flex space-x-4">
@@ -117,7 +120,7 @@ function UkeleleChords() {
             value={selectedChord.suffix}
             name={"suffix"}
             onChange={handleChord}
-          >
+            >
             <option value="all">all </option>
             {
               UkeleleChordsData[selectedChord.chord].map((chord: any, ind: number) =>
@@ -129,7 +132,7 @@ function UkeleleChords() {
         </div>
       </div>
       <div className="flex flex-wrap justify-center">
-
+        
         {currentChords.length > 0 && currentChords.map((chord: any, ind: number) => {
           return (
             <div key={ind} className="">
@@ -152,9 +155,10 @@ function UkeleleChords() {
             </div>
           )
         })
-        }
+      }
       </div>
     </div>
+      </Layout>
   )
 }
 export default UkeleleChords;

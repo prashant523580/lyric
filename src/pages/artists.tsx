@@ -5,6 +5,7 @@ import { getSongByArtists } from "redux/actions/songlist.action";
 import MainLayout from "components/Main";
 import { useAppSelector } from "redux/store";
 import HTMLReactParser from "html-react-parser";
+import Layout from "components/Layout";
 function Songs(props: any) {
     // const navigate = useNavigate();
     // const location = useLocation();
@@ -52,7 +53,7 @@ function Songs(props: any) {
     }
 
     return (
-        <>
+        <Layout>
             <div className={" px-4 py-4"} >
                 {artistCategories.map((item: any, ind: number) => {
                     return (
@@ -66,7 +67,7 @@ function Songs(props: any) {
                 })}
 
             </div>
-        </>
+        </Layout>
     )
 }
 

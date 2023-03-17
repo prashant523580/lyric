@@ -2,6 +2,8 @@ import React from 'react'
 
 export default function Loading() {
   return (
-    <div>Loading...</div>
+    <div className='h-[100vh] '>
+      <h1 className='font-bold'>Loading</h1>
+    </div>
   )
 }

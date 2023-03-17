@@ -5,6 +5,7 @@ import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useState, useEffect} from "react";
 import { useAppSelector } from "redux/store";
+import Layout from "components/Layout";
 // import {getAllLyricChords} from "../../redux/actions/index.action";
 
 function SongLists() {
@@ -28,7 +29,7 @@ function SongLists() {
          router.push(`/${item.artist}/${item.songname}`)
     }
     return (
-    <>
+    <Layout>
 
     <div className="px-4" >
         {artistSongList.map((item : any, ind :number) => {
@@ -40,7 +41,7 @@ function SongLists() {
                 )
             })}
     </div>
-            </>
+            </Layout>
     )
 }
 

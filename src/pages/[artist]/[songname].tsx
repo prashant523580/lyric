@@ -14,6 +14,8 @@ import Chord from '@tombatossals/react-chords/lib/Chord';
 import GuitarChordsData from "@tombatossals/chords-db/lib/guitar.json"
 import UkuleleChordsData from "@tombatossals/chords-db/lib/ukulele.json";
 import { getAllSongLists } from "redux/actions/songlist.action";
+import Layout from "components/Layout";
+import MainLayout from "components/Main";
 interface ChordSuffixTypes {
     chord: string,
     suffix: string
@@ -71,6 +73,7 @@ function Songs(props: any) {
     const chordRef = React.useRef<any>();
     const songs = useAppSelector(state => state.songs.songLists);
     const [isGuitarChord, setIsguitarChord] = React.useState(true);
+    const [step, setStep] = React.useState(0);
     const [options, setOptions] = useState({
         play: false,
         speed: 3,
@@ -82,7 +85,7 @@ function Songs(props: any) {
     let ukuleleChordsData: any = UkuleleChordsData.chords;
     React.useEffect(() => {
         dispatch(getAllSongLists())
-    },[dispatch])
+    }, [dispatch])
     React.useEffect(() => {
         let { artist, songname } = router.query;
         if (songs.length > 0) {
@@ -118,9 +121,9 @@ function Songs(props: any) {
 
     React.useEffect(() => {
         setChords(currentArtistSong.chords)
-    
+
     }, [currentArtistSong])
-    
+
     React.useEffect(() => {
         setCurrentGuitarChords(getInstrumentChord(guitarChordsData))
         setCurrentUkuleleChords(getInstrumentChord(ukuleleChordsData))
@@ -139,6 +142,18 @@ function Songs(props: any) {
         );
     }
     const updateTranspose = (n: any) => {
+        if (n === 1) {
+            setStep(step + n)
+            if (step === 11) {
+                setStep(0)
+            }
+        } else if (n === -1) {
+
+            setStep(step + n)
+            if (step === -11) {
+                setStep(0)
+            }
+        }
         let elements = chordRef.current.children;
         Array.from(elements).forEach((span: any, ind) => {
             if (span.nodeName === "SPAN") {
@@ -155,8 +170,8 @@ function Songs(props: any) {
             }
         })
         let transposedChord: any = chordArray.map(({ chord, suffix }: any) => {
-          
-            if (isGuitarChord === true ) {
+
+            if (isGuitarChord === true) {
                 if (chord == "A#") {
                     chord = "Bb";
                 } else if (chord == "D#") {
@@ -177,10 +192,14 @@ function Songs(props: any) {
                     chord = "E"
                 } else if (chord == "F") {
                     chord = "F"
+                } else if (chord == "Gb") {
+                    chord = "F#"
+                } else if (chord == "Db") {
+                    chord = "C#"
                 } else {
                     chord = chord
                 }
-            } else if(isGuitarChord === false) {
+            } else if (isGuitarChord === false) {
                 if (chord == "A#") {
                     chord = "Bb";
                 } else if (chord == "D#") {
@@ -215,12 +234,13 @@ function Songs(props: any) {
             }
         });
         setChords(transposedChord);
-       
+
     }
     React.useEffect(() => {
+        // console.log(chords)
         let transposedChord: any = chords.map(({ chord, suffix }: any) => {
-          
-            if (isGuitarChord ) {
+            console.log(isGuitarChord)
+            if (isGuitarChord === true) {
                 if (chord == "A#") {
                     chord = "Bb";
                 } else if (chord == "D#") {
@@ -241,10 +261,14 @@ function Songs(props: any) {
                     chord = "E"
                 } else if (chord == "F") {
                     chord = "F"
+                } else if (chord == "Gb") {
+                    chord = "F#"
+                } else if (chord == "Db") {
+                    chord = "C#"
                 } else {
                     chord = chord
                 }
-            } else if(isGuitarChord === false) {
+            } else if (isGuitarChord === false) {
                 if (chord == "A#") {
                     chord = "Bb";
                 } else if (chord == "D#") {
@@ -279,8 +303,8 @@ function Songs(props: any) {
             }
         });
         setChords(transposedChord);
-    },[isGuitarChord,chords])
-    const getTransposedChords = (n :any) => {
+    }, [isGuitarChord])
+    const getTransposedChords = (n: any) => {
         // let chordArray: any = chords.map((chord: any) => {
         //     return {
         //         chord: transposeChord(chord.chord, n),
@@ -313,7 +337,7 @@ function Songs(props: any) {
                 } else {
                     chord = chord
                 }
-            } else if(isGuitarChord === false) {
+            } else if (isGuitarChord === false) {
                 if (chord == "A#") {
                     chord = "Bb";
                 } else if (chord == "D#") {
@@ -475,7 +499,7 @@ function Songs(props: any) {
 
     // }
     return (
-        <>
+        <Layout>
 
             <div className={"px-4 "} >
                 <div>
@@ -491,12 +515,11 @@ function Songs(props: any) {
                 </Button>
                 {
                     isShowChart &&
-                    <div className={"bg-gray-200 p-2 " }>
-                        <div> 
+                    <div className={"bg-gray-200 p-2 "}>
+                        <div>
                             <p> Chord: {isGuitarChord ? "Guitar Chords" : "Ukulele Chords"}</p>
-                        <Button onClick={() => {
-                        
-                            setIsguitarChord(!isGuitarChord)
+                            <Button onClick={() => {
+                                setIsguitarChord(!isGuitarChord)
                             }}>{isGuitarChord ? "Guitar" : "Ukulele"}</Button>
                         </div>
                         {/* display chord by instrument */}
@@ -535,7 +558,7 @@ function Songs(props: any) {
                 <div className="fixed bottom-0 left-0 w-full flex justify-center items-center bg-black">
 
                     <Button onClick={() => updateTranspose(-1)}>-</Button>
-                    <span className="text-white">{0}</span>
+                    <span className="text-white">{step}</span>
                     <Button onClick={() => updateTranspose(1)}>+</Button>
                     <div>
                         {/* <label htmlFor="default-range" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default range</label> */}
@@ -543,7 +566,7 @@ function Songs(props: any) {
                     </div>
                 </div>
             </div>
-        </>
+        </Layout>
     )
 }
 
