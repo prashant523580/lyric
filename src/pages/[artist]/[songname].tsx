@@ -82,7 +82,7 @@ function Songs(props: any) {
     const intervalId = React.useRef<NodeJS.Timeout | null | string | undefined>(null);
     const [options, setOptions] = useState<any>({
         play: false,
-        speed: .5,
+        speed: 1,
         transpose: 0,
         results: "",
         scales: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]

@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <div className='h-[100vh] '>
         <h1>Loading....</h1>
-      {/* <div className={styles.lds_ripple}><div></div>loading<div></div></div> */}
+      <div className={styles.lds_ripple}><div></div>loading<div></div></div>
      </div>
   )
 }

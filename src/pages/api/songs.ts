@@ -8,7 +8,7 @@ const songLists = [
     {
         "artist": "1974AD",
         "songname": "Parelima",
-        "lyricChord": '[E]Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]rakhana, [E]anga[F#m]loma [Asus2]bandhi [E]rakhana  ',
+        "lyricChord": '[E] Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]raakha na, [E] anga[F#m]loma [Asus2]bandhi [E]raakha, [E] Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]raakha na, [E] anga[F#m]loma [Asus2]bandhi [E]raakha,,[E] Jaana [F#m]nadeu  [Asus2] &nbsp;roka [E]na rokha, [E] Udna[F#m] nadeu [Asus2] aakash ko chari jastai  [E]malai,,, [C#m] Bandhera raakha timrai [B]mutuma, [C#m] yo ta timrai dhadhkana h[B]o, [C#m] Saachera raakha timrai [B]aakhama, [A] yo ta timrai sahara h[B]o,,, [E] mana [F#m]bhitra  [Asus2]saanchi &nbsp; &nbsp;[E]raakha na, [E] aakha[F#m]bhitra [Asus2]aljhai [E]raakha,[E] mana [F#m]bhitra  [Asus2]saanchi &nbsp; &nbsp;[E]raakha na, [E] aakha[F#m]bhitra [Asus2]aljhai [E]raakha,,[E]ramna [F#m]deu na  [Asus2] &nbsp;timrai [E]aankha ma, [E] baas[F#m] basna deu [Asus2] timro hridaya ko dhukdhu[E]ki ma,,, [C#m] Bandhera rakha timrai [B]mutuma, [C#m] yo ta timrai dhadhkana h[B]o, [C#m] Saachera rakha timrai [B]aakhama, [A] yo ta timrai sahara h[B]o,,, [E] Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]raakha na, [E] anga[F#m]loma [Asus2]bandhi [E]raakha, [E] Pare[F#m]lima  [Asus2]lukai &nbsp; &nbsp;[E]raakha na, [E] anga[F#m]loma [Asus2]bandhi [E]raakha,,',
         "beat": "4/4",
         "tempo": "93bpm",
         "key": "E major",
@@ -35,6 +35,25 @@ const songLists = [
             { "chord": "G", "suffix": "major" },
             { "chord": "C", "suffix": "major" },
             { "chord": "E", "suffix": "major" },
+            { "chord": "E", "suffix": "minor" },
+            { "chord": "D", "suffix": "minor" }
+        ]
+    },
+    {
+        "artist": "1974AD",
+        "songname": "Nepali Ho",
+        "lyricChord": "[C]Jaso gara  [Em]je bhana,[Am]jata sukai laijau ma[F]lai [Dm],yo [G]maan ta me[F]ro nepali [C]ho,[C]Jaso gara  [Em]je bhana,[Am]jata sukai laijau ma[F]lai [Dm],yo [G]maan ta me[F]ro nepali [C]ho,, malai garbha [E]chha hamro purkha [Am]le, Kathi be[F]tha ha[G]ru sa[C]hera, Kathi be[F]tha ha[G]ru sa[C]hera, Iti[Em]has ma ka[G]tha ta lekhe k[C]ai chha,,[C]Jaso gara  [Em]je bhana,[Am]jata sukai laijau ma[F]lai [Dm],yo [G]maan ta me[F]ro nepali [C]ho,,, na [C]nai ladai ko [Em] maidan baata, [Am] bhaagi din[F]chha, na ta [Dm]sunko ta[G]raju ma [C]biki dincha, na [C]nai ladai ko [Em] maidan baata ,[Am] bhaagi din[F]chha, na ta [Dm]sunko ta[G]raju ma [C]biki dincha,, aaph[E]nai karma ma atal rahane, aaph[Am]nai pasina ma biswas raakhne,yo [Dm]man to me[G]ro &nbsp; nepali [C]ho,, na [C]nai aru ko [Em] bharosama, [Am] baanchi din[F]chha, na ta [Dm]aaphno a[G]dhikarlai [C]lutna dinchha,na [C]nai aru ko [Em] bharosama, [Am] baanchi din[F]chha, na ta [Dm]aaphno a[G]dhikaarlai [C]lutna dinchha, hi[E]mal jhain chamkilo safa chha chaati, aa[Am]kash jhain phijiyeko bichaar chha bisal,yo [Dm]man to me[G]ro &nbsp; nepali [C]ho,,[C]Jaso gara  [Em]je bhana,[Am]jata sukai laijau ma[F]lai [Dm],yo [G]maan ta me[F]ro nepali [C]ho,, malai garbha [E]chha hamro purkha [Am]le, Kathi be[F]tha ha[G]ru sa[C]hera, Kathi be[F]tha ha[G]ru sa[C]hera, Iti[Em]has ma ka[G]tha ta lekhe k[C]ai chha,,[C]Jaso gara  [Em]je bhana,[Am]jata sukai laijau ma[F]lai [Dm],yo [G]maan ta me[F]ro nepali [C]ho, ",
+        "beat": "4/4",
+        "tempo": "135bpm",
+        "key": "C Major",
+        "strum": "D &nbsp;DU&nbsp;-U&nbsp; DU",
+        "chords": [
+            { "chord": "E", "suffix": "minor" },
+            { "chord": "C", "suffix": "major" },
+            { "chord": "G", "suffix": "major" },
+            { "chord": "F", "suffix": "major" },
+            { "chord": "E", "suffix": "major" },
+            { "chord": "A", "suffix": "minor" },
             { "chord": "D", "suffix": "minor" }
         ]
     },
@@ -62,11 +81,11 @@ const songLists = [
         "key": "G major",
         "strum": "D &nbsp;DU&nbsp; -U&nbsp; DU",
         "chords": [
-            { "chord": "C", "quality": "major" },
-            { "chord": "G", "quality": "minor" },
-            { "chord": "A", "quality": "sus2" },
-            { "chord": "C#", "quality": "minor" },
-            { "chord": "B", "quality": "major" }]
+            { "chord": "C", "suffix": "major" },
+            { "chord": "G", "suffix": "minor" },
+            { "chord": "A", "suffix": "sus2" },
+            { "chord": "D", "suffix": "minor" },
+            { "chord": "B", "suffix": "major" }]
     },
 ]
 const lyricChords = [

@@ -2,51 +2,56 @@
 import MainLayout from 'components/Main'
 import store from "redux/store"
 import 'styles/globals.css'
+import styles from "styles/Home.module.css";
 import type { AppProps } from 'next/app'
-import React, { Suspense } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import Loading from 'components/Layout'
 
 export default function App({ Component, pageProps }: AppProps) {
 
-  const [loading,setLoading] = React.useState(true);
-React.useEffect(() => {
+  const [loading, setLoading] = React.useState(true);
+  React.useEffect(() => {
     setInterval(() => {
       setLoading(false)
-    },2000)
-   
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("service-worker.js").then(
-        function (registration) {
-          console.log(
-            "Service Worker registration successful with scope: ",
-            registration.scope
-          );
-        },
-        function (err) {
-          console.log("Service Worker registration failed: ", err);
-        }
-      );
-    });
-  }
+    }, 2000)
 
-},[loading])
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("service-worker.js").then(
+          function (registration) {
+            console.log(
+              "Service Worker registration successful with scope: ",
+              registration.scope
+            );
+          },
+          function (err) {
+            console.log("Service Worker registration failed: ", err);
+          }
+        );
+      });
+    }
+
+  }, [loading])
 
   return (
 
-loading ?<>
-<Loading/>
-</> :
+    loading ? 
+    <div className='flex flex-col justify-center items-center h-[100vh]'>
 
-    <Provider store={store}>
+    <div className={styles.lds_ripple}><div></div><div></div></div>
+    <h1>Loading...</h1>
+     </div>
+     :
 
-    <MainLayout>
+      <Provider store={store}>
 
-        <Component {...pageProps} />
-    </MainLayout>
-   
-    </Provider>
+        <MainLayout>
+
+          <Component {...pageProps} />
+        </MainLayout>
+
+      </Provider>
 
 
 
