@@ -18,6 +18,8 @@ import Layout from "components/Layout";
 import MainLayout from "components/Main";
 import Divider from "components/Divider";
 import Link from "next/link";
+import PlayIcon from '@mui/icons-material/PlayArrow';
+import PauseIcon from '@mui/icons-material/Pause';
 interface ChordSuffixTypes {
     chord: string,
     suffix: string
@@ -76,9 +78,11 @@ function Songs(props: any) {
     const songs = useAppSelector(state => state.songs.songLists);
     const [isGuitarChord, setIsguitarChord] = React.useState(true);
     const [step, setStep] = React.useState(0);
-    const [options, setOptions] = useState({
+
+    const intervalId = React.useRef<NodeJS.Timeout | null | string | undefined>(null);
+    const [options, setOptions] = useState<any>({
         play: false,
-        speed: 3,
+        speed: .5,
         transpose: 0,
         results: "",
         scales: ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
@@ -102,7 +106,13 @@ function Songs(props: any) {
             })
             setCurrentArtistAllSong(artistSongs)
         }
-            setStep(0)
+        setStep(0)
+        setOptions((pre:any) => {
+            return{
+                ...pre,
+                play:false
+            }
+        })
     }, [songs, router])
 
     const getInstrumentChord = (instrument: any) => {
@@ -129,8 +139,23 @@ function Songs(props: any) {
     React.useEffect(() => {
         setCurrentGuitarChords(getInstrumentChord(guitarChordsData))
         setCurrentUkuleleChords(getInstrumentChord(ukuleleChordsData))
-    }, [guitarChordsData, ukuleleChordsData, chords])
+    }, [guitarChordsData, ukuleleChordsData, chords]);
 
+    React.useEffect(() => {
+        document.addEventListener("visibilitychange", () => {
+            if (document["hidden"]) {
+                intervalId.current !== null && clearInterval(intervalId.current);
+                setOptions((pre:any) => {
+                    return { ...pre, play: false }
+                })
+
+            }
+
+        })
+        return () => {
+            intervalId.current !== null && clearInterval(intervalId.current)
+        }
+    }, [intervalId])
     const transposeChord = (chord: string, amount: number) => {
         // console.log(typeof(chord), typeof(amount))
         var normalizeMap: any = { "Cb": "B", "Db": "C#", "Eb": "D#", "Fb": "E", "Gb": "F#", "Ab": "G#", "Bb": "A#", "E#": "F", "B#": "C" }
@@ -383,7 +408,56 @@ function Songs(props: any) {
             }
         })
     }
+    React.useEffect(() => {
+		if (options.play === true) {
+			startScroll();
+		} else {
+			stopScroll();
+		}
+			if(chordRef.current !== null){
 
+				chordRef.current.addEventListener("touchstart", stopScroll);
+				chordRef.current.addEventListener("touchend", startScroll) 
+			}
+
+	}, [options.play])
+	function startScroll() {
+		(options.play === true) ? intervalId.current = setInterval(scrollToBottom, 150) : intervalId.current !== null && clearInterval(intervalId.current);
+	}
+	function stopScroll() {
+		intervalId.current !== null && clearInterval(intervalId.current);
+	}
+    function scrollToBottom() {
+
+        let scrollTop = document.scrollingElement!.scrollTop;
+        let currentScroll = document.scrollingElement!.clientHeight + scrollTop;
+        let scrollHeight = document.scrollingElement!.scrollHeight;
+        if (currentScroll >= scrollHeight) {
+            if (intervalId.current !== null) clearInterval(intervalId.current);
+            setOptions((pre: any) => {
+                return {
+                    ...pre, play: false
+                }
+            })
+            return
+        }
+        window.scrollBy({ left: 0, top: options.speed, behavior: "smooth" });
+        // if(options.play === false){
+        // 	clearInterval(intervalId.current)
+        // }
+    }
+    const handleScrollSpeed = (e : React.SyntheticEvent) => {
+		// scrollToBottom()
+		//startScroll()
+		let value = (e.target as HTMLInputElement).value;
+		setOptions((pre: any) => {
+			return {
+				...pre, speed: Number(value),
+				play: false
+			}
+		})
+		intervalId.current !== null && clearInterval(intervalId.current)
+	}
 
     //Render Chord Chart by instument  
     const RenderCurrentInstrumentChords = ({ chords, instrumentName }: ChordsTypes) => {
@@ -497,9 +571,7 @@ function Songs(props: any) {
             </>
         )
     }
-    // const RenderCurrentInstrumentChords = ({chords,instrumentName}) => {
 
-    // }
     return (
         <Layout>
 
@@ -536,21 +608,21 @@ function Songs(props: any) {
                 }
                 {/* <GuitarChordComponent/> */}
                 <div className="flex justify-around border-t my-3 py-4">
-                    <div className="w-2/2 px-4 pb-10 max-md:px-1 ">
+                    <div className=" px-2 pb-10 max-md:px-1 ">
                         <div ref={(node: any) => chordRef.current = node} className={styles.lyricChord}>
                             <GenerateChordLyric str={currentArtistSong?.lyricChord} />
                         </div>
                     </div>
-                    <div className="flex flex-col items-center w-1/3">
-                        <div className=" px-2 py-3">
+                    <div className="flex flex-col items-center w-1/4">
+                        <div className=" py-3">
                             <div className=" flex flex-col  my-2">
-                                <h1 className="text-l font-bold">Related Lyric and Chords </h1>
+                                <h1 className="text-md font-bold">Related Lyric and Chords </h1>
                                 <Divider />
                             </div>
-                            <div className="px-2 flex flex-col rounded-md    bg-gray-400 ">
+                            <div className="px-2 flex flex-col bg-dark rounded-sm  ">
                                 {currentArtistAllSong && currentArtistAllSong.map((item: any, ind: number) => {
                                     return (
-                                        <Link className=" my-1 text-white" key={ind} href={`/${item.artist}/${item.songname}`}>{item.songname}</Link>
+                                        <Link className="rounded-md  px-2 bg-gray-400 my-1 text-white" key={ind} href={`/${item.artist}/${item.songname}`}>{item.songname}</Link>
                                     )
                                 })}
                             </div>
@@ -562,9 +634,17 @@ function Songs(props: any) {
                     <Button onClick={() => updateTranspose(-1)}>-</Button>
                     <span className="text-white">{step}</span>
                     <Button onClick={() => updateTranspose(1)}>+</Button>
-                    <div>
+                    <Button onClick={() => {
+                        setOptions((pre: any) => {
+                            return{
+                                ...pre,
+                                play: !options.play
+                            }
+                        })
+                    }}>{options.play ? <PauseIcon/> : <PlayIcon/>}</Button>
+                    <div className="flex items-center">
                         {/* <label htmlFor="default-range" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default range</label> */}
-                        <input id="default-range" onChange={updateSpeed} type="range" value={options.speed} className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" />
+                        <input id="default-range" onChange={handleScrollSpeed} min={".5"} max={"5"} step={".1"} type="range" value={options.speed} className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" />
                     </div>
                 </div>
             </div>
