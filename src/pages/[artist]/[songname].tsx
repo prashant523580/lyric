@@ -104,6 +104,7 @@ function Songs(props: any) {
             setCurrentArtistAllSong(artistSongs)
         }
         setStep(0)
+        stopScroll()
         setOptions((pre:any) => {
             return{
                 ...pre,
