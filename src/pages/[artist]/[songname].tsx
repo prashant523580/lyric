@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "redux/store";
 import HTMLReactParser from "html-react-parser";
-import styles from "../../styles/Lyric.module.scss";
+import styles from "styles/Lyric.module.scss";
 // import Link from "next/link";
 // import Divider from "@/components/Divider";
 import Chord from '@tombatossals/react-chords/lib/Chord';
@@ -15,10 +13,9 @@ import GuitarChordsData from "@tombatossals/chords-db/lib/guitar.json"
 import UkuleleChordsData from "@tombatossals/chords-db/lib/ukulele.json";
 import { getAllSongLists } from "redux/actions/songlist.action";
 import Layout from "components/Layout";
-import MainLayout from "components/Main";
 import Divider from "components/Divider";
 import Link from "next/link";
-import PlayIcon from '@mui/icons-material/PlayArrow';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 interface ChordSuffixTypes {
     chord: string,
@@ -420,7 +417,7 @@ function Songs(props: any) {
 				chordRef.current.addEventListener("touchend", startScroll) 
 			}
 
-	}, [options.play])
+	}, [options.play,startScroll, stopScroll,chordRef])
 	function startScroll() {
 		(options.play === true) ? intervalId.current = setInterval(scrollToBottom, 150) : intervalId.current !== null && clearInterval(intervalId.current);
 	}
@@ -641,7 +638,7 @@ function Songs(props: any) {
                                 play: !options.play
                             }
                         })
-                    }}>{options.play ? <PauseIcon/> : <PlayIcon/>}</Button>
+                    }}>{options.play ? <PauseIcon/> : <PlayArrowIcon/>}</Button>
                     <div className="flex items-center">
                         {/* <label htmlFor="default-range" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Default range</label> */}
                         <input id="default-range" onChange={handleScrollSpeed} min={".5"} max={"5"} step={".1"} type="range" value={options.speed} className="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700" />

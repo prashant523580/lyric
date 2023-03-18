@@ -1,18 +1,12 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { getSongByArtists } from "redux/actions/songlist.action";
-import MainLayout from "components/Main";
 import { useAppSelector } from "redux/store";
-import HTMLReactParser from "html-react-parser";
 import Layout from "components/Layout";
 function Songs(props: any) {
     // const navigate = useNavigate();
     // const location = useLocation();
     // const {state} = location;
     const router = useRouter();
-    const dispatch = useDispatch<any>();
-    const [currentArtistSong, setCurrentArtistSong] = useState<any>({});
     const [artistCategories, setArtistCategories] = useState<Array<string>>([]);
 
     const songs = useAppSelector(state => state.songs.songLists);
@@ -21,7 +15,6 @@ function Songs(props: any) {
 
 
     React.useEffect(() => {
-        let { artist, songname } = router.query;
         // console.log(router)
         // console.log(artistSongs)
         if (songs.length > 0) {
